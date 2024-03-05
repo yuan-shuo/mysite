@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>用户登录</h1>
+    <!-- method:提交表单所使用的方式，action:提交的路径 -->
+    <form method="post" action="/login/">
+
+        <!-- 这段不写会触发Django的保护机制，会无法进入post请求后的网页 -->
+        {% csrf_token %}
+
+        <input type="text" name="user" placeholder="用户名">
+        <input type="password" name="pwd" placeholder="密码">
+        <input type="submit" value="提交"/>
+        <span style="color: red;">{{ error_msg }}</span>
+    </form>
+</body>
+</html>

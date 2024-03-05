@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>{{name}}</title>
+        </head>
+        <body>
+            {% for item in array %}
+
+                <span>{{ item }}</span>
+            
+            {% endfor %}
+            <hr/>
+            <div>{{dic.salary}}</div>
+            <ul>
+                <!-- .items是键值对全用, .keys使用键, .values是用值 -->
+                {% for k, v in dic.items %}
+                    <li>{{ k }} = {{ v }}</li>
+                {% endfor %}
+                <!-- {% for item in dic.values %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+                {% for item in dic.keys %}
+                    <li>{{ item }}</li>
+                {% endfor %} -->
+
+                {% for item in arrPlusDic %}
+                    <div>name:{{ item.name }} + salary:{{ item.salary }}</div>
+                {% endfor %}
+
+                <!-- 条件语句 -->
+                {% if name == "Y" %}
+                {% elif name == "S" %}
+                {% else %}
+                {% endif %}
+
+                {% if name == "Y" %}
+                    <div>name is Y</div>
+                {% elif name == "S" %}
+                    <div>name is S</div>
+                {% else %}
+                    <div>name is not Y/S</div>
+                {% endif %}
+            </ul>
+        </body>
+    </html>

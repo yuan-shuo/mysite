@@ -1,0 +1,51 @@
+激活虚拟环境：
+   conda activate houduan
+
+启动：
+   python manage.py runserver
+
+管理员：
+   1. py manage.py createsuperuser
+   2. 39599207@qq.com
+   3. name = admin , pwd = 1742359208ys
+
+-------------------------------------------------------------------
+
+1. 在自己想要存放项目的文件夹中通过终端(cd xxx/xxx)后，
+   通过(虚拟环境)Django目录中的django-admin.exe创建项目:
+   E:\anaconda3\envs\houduan\Scripts\django-admin.exe startproject name1
+   以此来创建一个名为name1的Django项目
+
+2. python manage.py startapp app1  =>  创建一个名为app1的app应用
+
+3. 在settings.py中找到INSTALLED_APPS = []，在其中添加app1目录下的apps.py中的：
+   class App01Config(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "app1"
+   中的"App01Config"这一项，例：
+   INSTALLED_APPS = [
+    "app1.apps.App01Config",
+   ]，从而完成app1的注册
+   
+4. 在name1目录下找到name1文件夹，找到url.py文件，引用之前创建的app1并添加路径：
+   from app1 import views
+
+   urlpatterns = [
+    # path("admin/", admin.site.urls),
+
+    # www.xxx.com/index/ -> your function
+    path("index/", views.index),
+
+    path('userList/', views.userList),
+
+    path('tpl/', views.tpl)
+    ]，像是views.后面紧跟的，就是在app1目录下views.py中所定义的函数：
+    例一 =>
+    def index(request):
+        return HttpResponse("欢迎使用")
+
+    例二 =>
+    # 会根据注册顺序，依次从各个app的templates(自行创建)中寻找"userlist.html"
+    # 但如果是pycharm创建可能会在settings里DIR位置import os会从根目录先开始，否则根目录中的无效
+    def userList(request):
+        return render(request, "userlist.html")
